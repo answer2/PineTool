@@ -25,16 +25,22 @@ import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.Map;
 import top.canyie.pine.Pine;
+import top.canyie.pine.PineConfig;
 import top.canyie.pine.callback.MethodHook;
 import top.canyie.pine.callback.MethodReplacement;
 
 public class Pina {
+    
     private static final String TAG = "Pina";
+    
+    // Check Debug
+    private static boolean isDebug = PineConfig.debuggable;
 
     // Maps to store method information, hooks, and replacements
     private static final Map<Member, MethodInfo> methodMaps = new HashMap<>();
     private static final Map<Member, HookCallback> hookMaps = new HashMap<>();
     private static final Map<Member, ReplacementCallback> replaceMaps = new HashMap<>();
+    private static final Map<Member, MethodHook.Unhook> unhookMaps = new HashMap<>();
 
     /**
      * Adds an after hook to the specified method.
@@ -54,7 +60,7 @@ public class Pina {
             if (!hookMaps.containsKey(member)) {
                 HookCallback hook = new HookCallback(member);
                 hookMaps.put(member, hook);
-                Pine.hook(member, hook);
+                unhookMaps.put(member, Pine.hook(member, hook));
             }
         }
     }
@@ -77,7 +83,7 @@ public class Pina {
             if (!hookMaps.containsKey(member)) {
                 HookCallback hook = new HookCallback(member);
                 hookMaps.put(member, hook);
-                Pine.hook(member, hook);
+                unhookMaps.put(member, Pine.hook(member, hook));
             }
         }
     }
@@ -99,8 +105,29 @@ public class Pina {
         if (!replaceMaps.containsKey(member)) {
             ReplacementCallback replace = new ReplacementCallback(member);
             replaceMaps.put(member, replace);
-            Pine.hook(member, replace);
+            unhookMaps.put(member, Pine.hook(member, replace));
         }
+    }
+
+    /**
+     * Unhooks a method by removing its associated hook from the map and calling the unhook method.
+     *
+     * @param member The method or constructor to unhook.
+     */
+    public static void unHook(Member member) {
+        if (unhookMaps.containsKey(member)) {
+            unhookMaps.get(member).unhook();
+            unhookMaps.remove(member);
+        }
+    }
+
+    /**
+     * Sets the debug mode for the HookManager.
+     *
+     * @param bool If true, debug information (such as exceptions) will be printed.
+     */
+    public static void setDebug(boolean bool) {
+        isDebug = bool;
     }
 
     /**
@@ -111,16 +138,34 @@ public class Pina {
         protected BeforeCallback before;
         protected ReplaceCallback replace;
 
+        /**
+         * Sets the callback to be executed after the method is called.
+         *
+         * @param after The AfterCallback instance.
+         * @return The updated MethodInfo object.
+         */
         public MethodInfo setAfter(AfterCallback after) {
             this.after = after;
             return this;
         }
 
+        /**
+         * Sets the callback to be executed before the method is called.
+         *
+         * @param before The BeforeCallback instance.
+         * @return The updated MethodInfo object.
+         */
         public MethodInfo setBefore(BeforeCallback before) {
             this.before = before;
             return this;
         }
 
+        /**
+         * Sets the callback to replace the method implementation.
+         *
+         * @param replace The ReplaceCallback instance.
+         * @return The updated MethodInfo object.
+         */
         public MethodInfo setReplace(ReplaceCallback replace) {
             this.replace = replace;
             return this;
@@ -133,21 +178,47 @@ public class Pina {
     private static class HookCallback extends MethodHook {
         private final MethodInfo info;
 
+        /**
+         * Initializes HookCallback with the corresponding method's information.
+         *
+         * @param member The method or constructor to hook.
+         */
         public HookCallback(Member member) {
             this.info = methodMaps.get(member);
         }
 
+        /**
+         * Executes the after callback if defined.
+         *
+         * @param callFrame The call frame context.
+         */
         @Override
-        public void afterCall(Pine.CallFrame callFrame) throws Throwable {
-            if (info != null && info.after != null) {
-                info.after.afterHook(callFrame);
+        public void afterCall(Pine.CallFrame callFrame) {
+            try {
+                super.afterCall(callFrame);
+                if (info != null && info.after != null) 
+                      info.after.afterHook(callFrame);
+                
+            } catch (Throwable err) {
+                if (isDebug) err.printStackTrace();
             }
         }
 
+        /**
+         * Executes the before callback if defined.
+         *
+         * @param callFrame The call frame context.
+         */
         @Override
-        public void beforeCall(Pine.CallFrame callFrame) throws Throwable {
-            if (info != null && info.before != null) {
-                info.before.beforeHook(callFrame);
+        public void beforeCall(Pine.CallFrame callFrame) {
+            try {
+                super.beforeCall(callFrame);
+                
+                if (info != null && info.before != null)
+                      info.before.beforeHook(callFrame);
+                
+            } catch (Throwable err) {
+                if (isDebug) err.printStackTrace();
             }
         }
     }
@@ -158,14 +229,31 @@ public class Pina {
     private static class ReplacementCallback extends MethodReplacement {
         private final MethodInfo info;
 
+        /**
+         * Initializes ReplacementCallback with the corresponding method's information.
+         *
+         * @param member The method or constructor to replace.
+         */
         public ReplacementCallback(Member member) {
             this.info = methodMaps.get(member);
         }
 
+        /**
+         * Replaces the method implementation if a replacement callback is defined,
+         * otherwise invokes the original method.
+         *
+         * @param callFrame The call frame context.
+         * @return The result of the method call.
+         * @throws Throwable if an error occurs during method execution.
+         */
         @Override
         public Object replaceCall(Pine.CallFrame callFrame) throws Throwable {
-            if (info != null && info.replace != null) {
-                return info.replace.replaceHook(callFrame);
+            try {
+                if (info != null && info.replace != null) 
+                  return info.replace.replaceHook(callFrame);
+                
+            } catch (Throwable err) {
+                if (isDebug) err.printStackTrace();
             }
             return callFrame.invokeOriginalMethod();
         }

@@ -1,0 +1,20 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/PineTool/app/src/main/java/dev/answer/pinetool/Pina.java",
+      "selection": {
+        "end": {
+          "column": 18,
+          "index": 8314,
+          "line": 252
+        },
+        "start": {
+          "column": 18,
+          "index": 8314,
+          "line": 252
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/PineTool/app/src/main/java/dev/answer/pinetool/Pina.java"
+}
