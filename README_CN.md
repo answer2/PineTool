@@ -3,14 +3,14 @@
 
 [English Version](README.md)
 
-PineTool 是一个工具，旨在简化使用 [Pine](https://github.com/canyie/pine) 库进行动态方法钩子和替换的过程，适用于 Android 应用程序。
+PineTool 是一个工具，旨在简化使用 [Pine](https://github.com/canyie/pine) 库进行动态方法Hook和替换的过程，仅适用于 Android。
 
 ## 入门指南
 
 ### 项目介绍
 
-PineTool 提供了一个简洁的接口来钩住方法，允许开发者在方法调用之前、之后或代替原方法执行自定义行为。无论是用于调试、修改应用行为还是测试，PineTool 都提供了一个灵活而强大的解决方案。
-
+PineTool 提供了简洁Lambda来Hook方法，允许开发者在方法调用after、before或代替原方法。用于调试、修改应用行为还是测试，PineTool 都提供了一个简便的解决方案和独特的风格。
+- 我们使用Pina这个类来进行Hook，目的也是为了和Pine使用类似，减少学习成本
 ### 导入
 
 在 `build.gradle` 文件中添加以下依赖项：
@@ -29,8 +29,7 @@ PineConfig.debuggable = true; // 设置应用是否可调试，建议与应用�
 ```
 
 ### 使用例子
-
-以下是一些示例，展示了如何使用 PineTool 钩住方法：
+以下是一些示例，展示了如何使用 PineTool Hook方法：
 
 ```java
 // 如果使用 ReplacementHook，不能同时使用 after 和 before 钩子
@@ -64,4 +63,4 @@ Pina.replace(
 
 ## 致谢
 
-特别感谢 [Pine](https://github.com/canyie/pine) 库提供的底层钩子机制。
+特别感谢 [Pine](https://github.com/canyie/pine) 库提供的底层Hook Framework。

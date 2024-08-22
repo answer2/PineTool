@@ -14,7 +14,22 @@
           "line": 252
         }
       }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/PineTool/README_CN.md",
+      "selection": {
+        "end": {
+          "column": 56,
+          "index": 1277,
+          "line": 65
+        },
+        "start": {
+          "column": 56,
+          "index": 1277,
+          "line": 65
+        }
+      }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/PineTool/app/src/main/java/dev/answer/pinetool/Pina.java"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/PineTool/README_CN.md"
 }
