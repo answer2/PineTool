@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "PineTool"
 
-include(":app")
+include(":app", "library")

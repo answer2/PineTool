@@ -19,6 +19,6 @@ package dev.answer.pinetool.callback;
 
 import top.canyie.pine.Pine;
 
-public interface BeforeCallback {
-	void beforeHook(Pine.CallFrame callFrame);
+public interface ReplaceCallback {
+	Object replaceHook(Pine.CallFrame callFrame) throws Throwable;
 }

@@ -42,6 +42,8 @@ public class Pina {
     private static final Map<Member, ReplacementCallback> replaceMaps = new HashMap<>();
     private static final Map<Member, MethodHook.Unhook> unhookMaps = new HashMap<>();
 
+    public static final ReplaceCallback DO_NOTHING = callFrame-> null;
+    
     /**
      * Adds an after hook to the specified method.
      *
@@ -101,6 +103,35 @@ public class Pina {
         }
 
         MethodInfo info = new MethodInfo().setReplace(callback);
+        methodMaps.put(member, info);
+        if (!replaceMaps.containsKey(member)) {
+            ReplacementCallback replace = new ReplacementCallback(member);
+            replaceMaps.put(member, replace);
+            unhookMaps.put(member, Pine.hook(member, replace));
+        }
+    }
+
+  /**
+   * Replaces the implementation of the provided `member` with a "do nothing" method.
+   *
+   * <p>This method is primarily used when you want to neutralize a method call by replacing it with
+   * a no-op (a method that does nothing). If the `member` is not already in `replaceMaps`, a new
+   * `ReplacementCallback` is created and hooked. This callback is stored in `replaceMaps` to ensure
+   * the replacement only happens once for each member.
+   *
+   * <p>The reason for creating a `ReplacementCallback` instead of using a simple placeholder is to
+   * facilitate the ability to unhook the replacement later. This allows for restoring the original
+   * method implementation if needed.
+   *
+   * @param member The method or constructor to be replaced with a "do nothing" implementation.
+   */
+  public static void doNothing(Member member) {
+        if (member == null) {
+            Log.e(TAG, "member can't be null");
+            return;
+        }
+
+        MethodInfo info = new MethodInfo().setReplace(DO_NOTHING);
         methodMaps.put(member, info);
         if (!replaceMaps.containsKey(member)) {
             ReplacementCallback replace = new ReplacementCallback(member);

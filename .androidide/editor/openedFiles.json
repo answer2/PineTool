@@ -1,35 +1,35 @@
 {
   "allFiles": [
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/PineTool/app/src/main/java/dev/answer/pinetool/Pina.java",
+      "file": "/storage/emulated/0/AndroidIDEProjects/PineTool/app/build.gradle.kts",
       "selection": {
         "end": {
-          "column": 18,
-          "index": 8314,
-          "line": 252
+          "column": 48,
+          "index": 840,
+          "line": 42
         },
         "start": {
-          "column": 18,
-          "index": 8314,
-          "line": 252
+          "column": 48,
+          "index": 840,
+          "line": 42
         }
       }
     },
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/PineTool/README_CN.md",
+      "file": "/storage/emulated/0/AndroidIDEProjects/PineTool/library/build.gradle.kts",
       "selection": {
         "end": {
-          "column": 56,
-          "index": 1277,
-          "line": 65
+          "column": 46,
+          "index": 587,
+          "line": 31
         },
         "start": {
-          "column": 56,
-          "index": 1277,
-          "line": 65
+          "column": 46,
+          "index": 587,
+          "line": 31
         }
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/PineTool/README_CN.md"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/PineTool/app/build.gradle.kts"
 }

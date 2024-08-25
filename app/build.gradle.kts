@@ -40,8 +40,10 @@ android {
 }
 
 dependencies {
-    implementation("top.canyie.pine:core:0.2.9")
-
+    implementation("top.canyie.pine:core:0.3.0")
+    
+    implementation(project(":library"))
+    
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.android.material:material:1.9.0")
