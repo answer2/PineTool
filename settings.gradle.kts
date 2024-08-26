@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "PineTool"
 
-include(":app", "library")
+include(":app", ":library", ":xposed")

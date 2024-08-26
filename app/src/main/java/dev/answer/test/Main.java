@@ -20,6 +20,7 @@ package dev.answer.test;
 import android.os.Build;
 import android.util.Log;
 import dev.answer.pinetool.Pina;
+import dev.answer.pinetool.Pinx;
 import top.canyie.pine.PineConfig;
 
 public class Main {
@@ -57,6 +58,13 @@ public class Main {
             Log.d(TAG, "I am method_2 replacement");
             return null;
           });
+
+      /* Xposed Style
+      Pinx.after(
+          Main.class.getDeclaredMethod("method_1"),
+          param -> {
+            Log.d(TAG, "I am method_1 after");
+          });*/
 
     } catch (Exception err) {
       err.printStackTrace();

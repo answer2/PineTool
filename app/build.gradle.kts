@@ -41,8 +41,10 @@ android {
 
 dependencies {
     implementation("top.canyie.pine:core:0.3.0")
+    implementation("top.canyie.pine:xposed:0.2.0")
     
     implementation(project(":library"))
+    implementation(project(":xposed"))
     
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")

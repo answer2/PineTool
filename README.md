@@ -19,6 +19,8 @@ Add the following dependency to your `build.gradle` file:
 implementation("top.canyie.pine:core:0.2.9")
 ```
 
+If you want to use `Xposed style hooks`, you can import the `xposed` folder of the project
+
 ### Initialization
 
 Before using PineTool, you need to configure Pine settings as shown below:
