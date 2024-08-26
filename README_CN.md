@@ -21,6 +21,10 @@ implementation("top.canyie.pine:core:0.2.9")
 
 如果你想使用`Xposed`风格的Hook可以引入项目的`xposed`文件夹
 
+```groovy
+implementation("top.canyie.pine:xposed:0.2.0")
+```
+
 ### 初始化
 
 在使用 PineTool 之前，您需要按照以下配置 Pine 设置：

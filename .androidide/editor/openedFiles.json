@@ -19,13 +19,13 @@
       "file": "/storage/emulated/0/AndroidIDEProjects/PineTool/app/build.gradle.kts",
       "selection": {
         "end": {
-          "column": 18,
-          "index": 859,
+          "column": 48,
+          "index": 889,
           "line": 43
         },
         "start": {
-          "column": 18,
-          "index": 859,
+          "column": 20,
+          "index": 861,
           "line": 43
         }
       }
@@ -59,7 +59,37 @@
           "line": 286
         }
       }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/PineTool/README.md",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 747,
+          "line": 22
+        },
+        "start": {
+          "column": 0,
+          "index": 747,
+          "line": 22
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/PineTool/README_CN.md",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 503,
+          "line": 26
+        },
+        "start": {
+          "column": 0,
+          "index": 503,
+          "line": 26
+        }
+      }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/PineTool/xposed/src/main/java/dev/answer/pinetool/Pinx.java"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/PineTool/README.md"
 }
